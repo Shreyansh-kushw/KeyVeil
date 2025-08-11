@@ -120,58 +120,63 @@ class Authentication(QDialog):
             self.signUp_ui.ImportBackup.clicked.connect(lambda: self.restoreBackup("""backup folder"""))
     
     def restoreBackup(self,directory):
+        
+        if os.path.isdir(directory):
 
-        available_backups = []
-        backups = []
-        for filename in os.listdir(directory):
-            if filename.startswith("backup") and filename.endswith(".zip"):
+            available_backups = []
+            backups = []
+            for filename in os.listdir(directory):
+                if filename.startswith("backup") and filename.endswith(".zip"):
+                    try:
+                        _, datetime_part = filename.split("_", 1)
+                        date_part, time_part = datetime_part.split(" ", 1)
+                        year, month, day = date_part.split("-")
+                        time_components = time_part.replace(".zip", "").split("-")
+
+                        hour, minute, second = time_components[:3]  # Ignore microseconds
+                        month_name = datetime.date(1900, int(month), 1).strftime('%B')
+                        backups.append(filename)
+                        available_backups.append(f"BACKUP FROM {day}-{month_name}-{year} {hour}:{minute}:{second}")
+                    except Exception as e:
+                        # print(f"Could not parse: {filename} — {e}")
+                        pass
+
+            dialog = BackupRestoreDialog(backup_files=available_backups)
+
+            if dialog.exec():
+                # print("✅ Selected backup:", backups[available_backups.index(dialog.get_selected_backup())])
+
                 try:
-                    _, datetime_part = filename.split("_", 1)
-                    date_part, time_part = datetime_part.split(" ", 1)
-                    year, month, day = date_part.split("-")
-                    time_components = time_part.replace(".zip", "").split("-")
+                    vos.restoreBackup(directory,backups[available_backups.index(dialog.get_selected_backup())])
+                    msg = QMessageBox()
+                    msg.setIcon(QMessageBox.Icon.Information)
+                    msg.setWindowTitle("Backup Restored")
+                    msg.setText("Backup restore successful! Please relauch the app for changes to take effect.")
+                    msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+                    msg.setWindowModality(Qt.WindowModality.ApplicationModal)
+                    msg.exec()
 
-                    hour, minute, second = time_components[:3]  # Ignore microseconds
-                    month_name = datetime.date(1900, int(month), 1).strftime('%B')
-                    backups.append(filename)
-                    available_backups.append(f"BACKUP FROM {day}-{month_name}-{year} {hour}:{minute}:{second}")
-                except Exception as e:
-                    # print(f"Could not parse: {filename} — {e}")
-                    pass
+                    # Delay quit slightly to allow cleanup of WebEnginePage
+                    QTimer.singleShot(100,self.restart)
 
-        dialog = BackupRestoreDialog(backup_files=available_backups)
+                except Exception as error:
+                    msg = QMessageBox()
+                    msg.setIcon(QMessageBox.Icon.Information)
+                    msg.setWindowTitle("Operation Failed")
+                    msg.setText("Backup restore aborted! The following error has occured: {}".format(error))
+                    msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+                    msg.setWindowModality(Qt.WindowModality.ApplicationModal)
+                    msg.exec()
+                    webview.windows[0].destroy()
 
-        if dialog.exec():
-            # print("✅ Selected backup:", backups[available_backups.index(dialog.get_selected_backup())])
-
-            try:
-                vos.restoreBackup(directory,backups[available_backups.index(dialog.get_selected_backup())])
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Backup Restored")
-                msg.setText("Backup restore successful! Please relauch the app for changes to take effect.")
-                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-                msg.setWindowModality(Qt.WindowModality.ApplicationModal)
-                msg.exec()
-
-                # Delay quit slightly to allow cleanup of WebEnginePage
-                QTimer.singleShot(100,self.restart)
-
-            except Exception as error:
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Operation Failed")
-                msg.setText("Backup restore aborted! The following error has occured: {}".format(error))
-                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-                msg.setWindowModality(Qt.WindowModality.ApplicationModal)
-                msg.exec()
-                webview.windows[0].destroy()
-
-                # Delay quit slightly to allow cleanup of WebEnginePage
-                QTimer.singleShot(100,self.restart)
+                    # Delay quit slightly to allow cleanup of WebEnginePage
+                    QTimer.singleShot(100,self.restart)
+            else:
+                # print("❌ Restore cancelled.")
+                pass
+        
         else:
-            # print("❌ Restore cancelled.")
-            pass
+            QMessageBox.warning(self, "Error", "No backup found!")
 
     def restart(self):
         # print("restarting")
