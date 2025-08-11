@@ -151,7 +151,7 @@ class Authentication(QDialog):
                     msg = QMessageBox()
                     msg.setIcon(QMessageBox.Icon.Information)
                     msg.setWindowTitle("Backup Restored")
-                    msg.setText("Backup restore successful! Please relauch the app for changes to take effect.")
+                    msg.setText("Backup restore successful! The app will now relaunch.")
                     msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                     msg.setWindowModality(Qt.WindowModality.ApplicationModal)
                     msg.exec()
@@ -204,7 +204,7 @@ class Authentication(QDialog):
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Icon.Information)
                 msg.setWindowTitle("Password reset successfull")
-                msg.setText("Password Reset successfull! Please restart the app for changes to take effect.")
+                msg.setText("Password Reset successfull!. The app will now relaunch.")
                 msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                 msg.setWindowModality(Qt.WindowModality.ApplicationModal)
                 msg.exec()                    
@@ -371,9 +371,9 @@ class KeyVeilAPI:
         self.SiteDetails_ui.EditUsername.clicked.connect(lambda: self.editUsername())
         self.SiteDetails_ui.EditPassword.clicked.connect(lambda: self.editPassword())
 
-        self.SiteDetails_ui.deleteButton.clicked.connect(lambda: self.deleteEntry(self.vaultDATA))
+        self.SiteDetails_ui.deleteButton.clicked.connect(lambda: self.deleteEntry(self.vaultDATA, username))
 
-        self.SiteDetails_ui.ok_cancel.accepted.connect(lambda: self.updateData(self.vaultDATA))
+        self.SiteDetails_ui.ok_cancel.accepted.connect(lambda: self.updateData(self.vaultDATA, username))
         self.SiteDetails_ui.ok_cancel.rejected.connect(lambda: self.dialog.reject())
 
         self.dialog.exec()
@@ -411,8 +411,8 @@ class KeyVeilAPI:
     def editPassword(self):
         self.SiteDetails_ui.PasswordEntry.setReadOnly(False)
 
-    def deleteEntry(self, vaultData):
-        choice = vos.delete_entry(vaultData, self.siteName)
+    def deleteEntry(self, vaultData, username, confirmation=True):
+        choice = vos.delete_entry(vaultData, self.siteName, username, confirmation)
         
         if choice == True:
             vault.saveVault(self.key, vaultData)
@@ -420,23 +420,46 @@ class KeyVeilAPI:
             webview.windows[0].load_url(os.path.abspath("frontend/index.html"))
 
     
-    def updateData(self, vaultData):
-        
+    def updateData(self, vaultData, username):
+
+
         if self.SiteDetails_ui.SiteName_entry.text().strip() == self.siteName:
-            vaultData.update({self.siteName:{
-                "url":self.SiteDetails_ui.SiteURL_entry.text().strip(),
-                "username":self.SiteDetails_ui.UsernameEntry.text().strip(),
-                "password":self.SiteDetails_ui.PasswordEntry.text().strip()
-            }})
+            # vaultData.update({self.siteName:{
+            #     "url":self.SiteDetails_ui.SiteURL_entry.text().strip(),
+            #     "username":self.SiteDetails_ui.UsernameEntry.text().strip(),
+            #     "password":self.SiteDetails_ui.PasswordEntry.text().strip()
+            # }})
+
+            for creds in (vaultData[self.siteName]):
+
+                if creds["username"] == self.SiteDetails_ui.UsernameEntry.text().strip():
+                    print("for else")
+                    creds.update({
+                        "url":self.SiteDetails_ui.SiteURL_entry.text().strip(),
+                        "password":self.SiteDetails_ui.PasswordEntry.text().strip()
+                    })    
+                    break
+            
+            else:
+                print("not updated")
+                (vaultData[self.siteName]).append({"url":self.SiteDetails_ui.SiteURL_entry.text().strip(),"username": self.SiteDetails_ui.UsernameEntry.text().strip(), "password": self.SiteDetails_ui.PasswordEntry.text().strip()})    
+                self.deleteEntry(vaultData, username, confirmation=False)
+
+
         
         else:
-            vaultData.update({self.SiteDetails_ui.SiteName_entry.text().strip():{
-                "url":self.SiteDetails_ui.SiteURL_entry.text().strip(),
-                "username":self.SiteDetails_ui.UsernameEntry.text().strip(),
-                "password":self.SiteDetails_ui.PasswordEntry.text().strip()
-            }})
 
-            self.deleteEntry(vaultData)
+            newSite = self.SiteDetails_ui.SiteName_entry.text().strip()
+
+            if newSite in vaultData.keys():
+                (vaultData[newSite]).append({"url":self.SiteDetails_ui.SiteURL_entry.text().strip(),"username": self.SiteDetails_ui.UsernameEntry.text().strip(), "password": self.SiteDetails_ui.PasswordEntry.text().strip()})
+                self.deleteEntry(vaultData, username, confirmation=False)
+
+            else:
+                vaultData[newSite] = []
+                (vaultData[newSite]).append({"url":self.SiteDetails_ui.SiteURL_entry.text().strip(),"username": self.SiteDetails_ui.UsernameEntry.text().strip(), "password": self.SiteDetails_ui.PasswordEntry.text().strip()})
+                self.deleteEntry(vaultData, username, confirmation=False)
+
         
         vault.saveVault(self.key, vaultData)
         self.dialog.update()

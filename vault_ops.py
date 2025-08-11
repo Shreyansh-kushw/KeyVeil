@@ -72,16 +72,28 @@ def backUp(destination = """backup folder""") -> None:
 
 
 
-def delete_entry(vault: dict, site: str) -> bool:
+def delete_entry(vault: dict, site: str, username:str, confirmation = True) -> bool:
     
     site = site.lower()   
-    choice = confirm(text='This action is irreversible.', title='Warning!', buttons=['OK', 'Cancel'])
+
+    if confirmation:
+        choice = confirm(text='This action is irreversible.', title='Warning!', buttons=['OK', 'Cancel'])
+    
+    else: 
+        choice = "OK"
 
     if choice == "OK":
 
         if site in vault.keys():
 
-            del vault[site]
+            # del vault[site]
+            for index, creds in enumerate(vault[site]):
+                
+                if creds["username"] == username:
+                    (vault[site]).pop(index)
+                    print("deleted")
+                    break
+
             return True
 
         else:
@@ -295,7 +307,7 @@ def change_password(current_password, new_pin, confirm_pin):
 
         vault.saveVault(new_key, vaultDATA)
         del new_key
-        alert("PIN Changed! Restart the app for changes to take effect.", title="Success")
+        alert("PIN Changed!", title="Success")
         PINchanged = True
         return
 
