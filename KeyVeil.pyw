@@ -181,7 +181,7 @@ class Authentication(QDialog):
     def restart(self):
         # print("restarting")
         QCoreApplication.quit()  # Close the current app
-        subprocess.Popen([sys.executable, "main_gui.pyw"], creationflags=subprocess.DETACHED_PROCESS)
+        subprocess.Popen([sys.executable, "KeyVeil.pyw"], creationflags=subprocess.DETACHED_PROCESS)
         sys.exit(0)  # Ensure process exits
 
     def resetPIN(self):
@@ -325,7 +325,7 @@ class KeyVeilAPI:
         return result
 
     def restart(self):
-        subprocess.Popen([sys.executable, "main_gui.pyw"], creationflags=subprocess.DETACHED_PROCESS)
+        subprocess.Popen([sys.executable, "KeyVeil.pyw"], creationflags=subprocess.DETACHED_PROCESS)
         QCoreApplication.quit()  # Close the current app
         sys.exit(0)  
 
