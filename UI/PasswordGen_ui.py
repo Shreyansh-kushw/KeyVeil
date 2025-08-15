@@ -16,52 +16,58 @@ class Ui_PassGenerator(object):
         PassGenerator.setMinimumSize(QtCore.QSize(300, 200))
         PassGenerator.setMaximumSize(QtCore.QSize(300, 200))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/Assets/iconslock.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("UI/Assets/iconslock.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         PassGenerator.setWindowIcon(icon)
         PassGenerator.setToolTip("")
-        PassGenerator.setStyleSheet("QDialog {\n"
-"    background-color: #dde6f0;  /* soft white */\n"
-"    border: 1px solid #ccc;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    font-size: 18px;\n"
-"    font-weight: bold;\n"
-"    color: #333;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"    background-color: #ffffff;\n"
-"    color: #000000;\n"
-"    border: 2px solid #cccccc;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px;\n"
-"    font-size: 15px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #007acc;  /* blue focus glow */\n"
-"    background-color: #f5faff;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #007acc;\n"
-"    color: #ffffff;\n"
-"    font-weight: bold;\n"
-"    border: none;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px 14px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #3399ff;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #006bb3;\n"
-"}\n"
-"")
+        PassGenerator.setStyleSheet(
+            "QDialog {\n"
+            "    background-color: #dde6f0;  /* soft white */\n"
+            "    border: 1px solid #ccc;\n"
+            "    border-radius: 12px;\n"
+            "}\n"
+            "\n"
+            "QLabel {\n"
+            "    font-size: 18px;\n"
+            "    font-weight: bold;\n"
+            "    color: #333;\n"
+            "}\n"
+            "\n"
+            "QLineEdit {\n"
+            "    background-color: #ffffff;\n"
+            "    color: #000000;\n"
+            "    border: 2px solid #cccccc;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px;\n"
+            "    font-size: 15px;\n"
+            "}\n"
+            "\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #007acc;  /* blue focus glow */\n"
+            "    background-color: #f5faff;\n"
+            "}\n"
+            "\n"
+            "QPushButton {\n"
+            "    background-color: #007acc;\n"
+            "    color: #ffffff;\n"
+            "    font-weight: bold;\n"
+            "    border: none;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px 14px;\n"
+            "}\n"
+            "\n"
+            "QPushButton:hover {\n"
+            "    background-color: #3399ff;\n"
+            "}\n"
+            "\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #006bb3;\n"
+            "}\n"
+            ""
+        )
         self.PassGenLabel = QtWidgets.QLabel(parent=PassGenerator)
         self.PassGenLabel.setGeometry(QtCore.QRect(16, 12, 311, 25))
         font = QtGui.QFont()
@@ -73,7 +79,10 @@ class Ui_PassGenerator(object):
         self.PassGenLabel.setObjectName("PassGenLabel")
         self.LengthLabel = QtWidgets.QLabel(parent=PassGenerator)
         self.LengthLabel.setGeometry(QtCore.QRect(-10, 74, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.LengthLabel.sizePolicy().hasHeightForWidth())
@@ -84,31 +93,34 @@ class Ui_PassGenerator(object):
         font.setBold(True)
         font.setKerning(False)
         self.LengthLabel.setFont(font)
-        self.LengthLabel.setStyleSheet("QLabel {\n"
-"    font-size: 14px;\n"
-"}")
+        self.LengthLabel.setStyleSheet("QLabel {\n" "    font-size: 14px;\n" "}")
         self.LengthLabel.setScaledContents(True)
         self.LengthLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.LengthLabel.setObjectName("LengthLabel")
         self.GeneratedPass = QtWidgets.QLineEdit(parent=PassGenerator)
         self.GeneratedPass.setGeometry(QtCore.QRect(115, 123, 131, 31))
-        self.GeneratedPass.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 12px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.GeneratedPass.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 12px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.GeneratedPass.setText("")
         self.GeneratedPass.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
         self.GeneratedPass.setReadOnly(True)
         self.GeneratedPass.setObjectName("GeneratedPass")
         self.PassLabel = QtWidgets.QLabel(parent=PassGenerator)
         self.PassLabel.setGeometry(QtCore.QRect(-9, 129, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.PassLabel.sizePolicy().hasHeightForWidth())
@@ -119,17 +131,18 @@ class Ui_PassGenerator(object):
         font.setBold(True)
         font.setKerning(False)
         self.PassLabel.setFont(font)
-        self.PassLabel.setStyleSheet("QLabel {\n"
-"    font-size: 14px;\n"
-"}")
+        self.PassLabel.setStyleSheet("QLabel {\n" "    font-size: 14px;\n" "}")
         self.PassLabel.setScaledContents(True)
         self.PassLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.PassLabel.setObjectName("PassLabel")
         self.GenerateButton = QtWidgets.QPushButton(parent=PassGenerator)
         self.GenerateButton.setGeometry(QtCore.QRect(250, 59, 41, 41))
-        self.GenerateButton.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.GenerateButton.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.GenerateButton.setToolTipDuration(-1)
-        self.GenerateButton.setStyleSheet("""
+        self.GenerateButton.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -146,18 +159,26 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.GenerateButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("UI/Assets/settings.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(
+            QtGui.QPixmap("UI/Assets/settings.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         self.GenerateButton.setIcon(icon1)
         self.GenerateButton.setIconSize(QtCore.QSize(30, 30))
         self.GenerateButton.setObjectName("GenerateButton")
         self.CopyVutton = QtWidgets.QPushButton(parent=PassGenerator)
         self.CopyVutton.setGeometry(QtCore.QRect(250, 117, 41, 41))
-        self.CopyVutton.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.CopyVutton.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.CopyVutton.setToolTipDuration(-1)
-        self.CopyVutton.setStyleSheet("""
+        self.CopyVutton.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -174,10 +195,15 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.CopyVutton.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("UI/Assets/copy.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(
+            QtGui.QPixmap("UI/Assets/copy.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         self.CopyVutton.setIcon(icon2)
         self.CopyVutton.setIconSize(QtCore.QSize(30, 30))
         self.CopyVutton.setObjectName("CopyVutton")
@@ -195,37 +221,39 @@ QPushButton:pressed {
         self.PasswordIcon.setObjectName("PasswordIcon")
         self.LengthEntry = QtWidgets.QSpinBox(parent=PassGenerator)
         self.LengthEntry.setGeometry(QtCore.QRect(115, 66, 131, 31))
-        self.LengthEntry.setStyleSheet("QSpinBox {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 2px 5px;  /* Smaller padding to avoid clipping the arrows */\n"
-"    font-size: 14px;\n"
-"}\n"
-"\n"
-"/* When focused */\n"
-"QSpinBox:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"\n"
-"/* Optional: Style the up/down buttons */\n"
-"QSpinBox::up-button, QSpinBox::down-button {\n"
-"    border: none;\n"
-"    background-color: transparent;\n"
-"    width: 16px;\n"
-"}\n"
-"\n"
-"/* Optional hover effect on buttons */\n"
-"QSpinBox::up-button:hover, QSpinBox::down-button:hover {\n"
-"    background-color: #ecf0f1;\n"
-"}\n"
-"\n"
-"/* Optional: Style the line edit inside the spin box */\n"
-"QSpinBox QLineEdit {\n"
-"    border: none;\n"
-"    padding: 0px;\n"
-"    background: transparent;\n"
-"}\n"
-"")
+        self.LengthEntry.setStyleSheet(
+            "QSpinBox {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 2px 5px;  /* Smaller padding to avoid clipping the arrows */\n"
+            "    font-size: 14px;\n"
+            "}\n"
+            "\n"
+            "/* When focused */\n"
+            "QSpinBox:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            "\n"
+            "/* Optional: Style the up/down buttons */\n"
+            "QSpinBox::up-button, QSpinBox::down-button {\n"
+            "    border: none;\n"
+            "    background-color: transparent;\n"
+            "    width: 16px;\n"
+            "}\n"
+            "\n"
+            "/* Optional hover effect on buttons */\n"
+            "QSpinBox::up-button:hover, QSpinBox::down-button:hover {\n"
+            "    background-color: #ecf0f1;\n"
+            "}\n"
+            "\n"
+            "/* Optional: Style the line edit inside the spin box */\n"
+            "QSpinBox QLineEdit {\n"
+            "    border: none;\n"
+            "    padding: 0px;\n"
+            "    background: transparent;\n"
+            "}\n"
+            ""
+        )
         self.LengthEntry.setMaximum(999999999)
         self.LengthEntry.setObjectName("LengthEntry")
 
@@ -238,5 +266,14 @@ QPushButton:pressed {
         self.PassGenLabel.setText(_translate("PassGenerator", "PASSWORD GENERATOR"))
         self.LengthLabel.setText(_translate("PassGenerator", "LENGTH"))
         self.PassLabel.setText(_translate("PassGenerator", "PASSWORD"))
-        self.GenerateButton.setToolTip(_translate("PassGenerator", "<html><head/><body><p>Generate password</p></body></html>"))
-        self.CopyVutton.setToolTip(_translate("PassGenerator", "<html><head/><body><p>Copy password</p></body></html>"))
+        self.GenerateButton.setToolTip(
+            _translate(
+                "PassGenerator",
+                "<html><head/><body><p>Generate password</p></body></html>",
+            )
+        )
+        self.CopyVutton.setToolTip(
+            _translate(
+                "PassGenerator", "<html><head/><body><p>Copy password</p></body></html>"
+            )
+        )

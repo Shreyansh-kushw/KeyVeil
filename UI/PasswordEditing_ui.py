@@ -16,52 +16,58 @@ class Ui_PasswordChange(object):
         PasswordChange.setMinimumSize(QtCore.QSize(300, 180))
         PasswordChange.setMaximumSize(QtCore.QSize(300, 225))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/Assets/iconslock.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("UI/Assets/iconslock.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         PasswordChange.setWindowIcon(icon)
         PasswordChange.setAutoFillBackground(False)
-        PasswordChange.setStyleSheet("QDialog {\n"
-"    background-color: #dde6f0;  /* soft white */\n"
-"    border: 1px solid #ccc;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    font-size: 18px;\n"
-"    font-weight: bold;\n"
-"    color: #333;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"    background-color: #ffffff;\n"
-"    color: #000000;\n"
-"    border: 2px solid #cccccc;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px;\n"
-"    font-size: 15px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #007acc;  /* blue focus glow */\n"
-"    background-color: #f5faff;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #007acc;\n"
-"    color: #ffffff;\n"
-"    font-weight: bold;\n"
-"    border: none;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px 14px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #3399ff;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #006bb3;\n"
-"}\n"
-"")
+        PasswordChange.setStyleSheet(
+            "QDialog {\n"
+            "    background-color: #dde6f0;  /* soft white */\n"
+            "    border: 1px solid #ccc;\n"
+            "    border-radius: 12px;\n"
+            "}\n"
+            "\n"
+            "QLabel {\n"
+            "    font-size: 18px;\n"
+            "    font-weight: bold;\n"
+            "    color: #333;\n"
+            "}\n"
+            "\n"
+            "QLineEdit {\n"
+            "    background-color: #ffffff;\n"
+            "    color: #000000;\n"
+            "    border: 2px solid #cccccc;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px;\n"
+            "    font-size: 15px;\n"
+            "}\n"
+            "\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #007acc;  /* blue focus glow */\n"
+            "    background-color: #f5faff;\n"
+            "}\n"
+            "\n"
+            "QPushButton {\n"
+            "    background-color: #007acc;\n"
+            "    color: #ffffff;\n"
+            "    font-weight: bold;\n"
+            "    border: none;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px 14px;\n"
+            "}\n"
+            "\n"
+            "QPushButton:hover {\n"
+            "    background-color: #3399ff;\n"
+            "}\n"
+            "\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #006bb3;\n"
+            "}\n"
+            ""
+        )
         self.EditPassword = QtWidgets.QLabel(parent=PasswordChange)
         self.EditPassword.setGeometry(QtCore.QRect(76, 11, 171, 25))
         font = QtGui.QFont()
@@ -69,44 +75,49 @@ class Ui_PasswordChange(object):
         font.setPointSize(10)
         font.setBold(True)
         self.EditPassword.setFont(font)
-        self.EditPassword.setStyleSheet("QLabel {\n"
-"    font-size: 18px;\n"
-"}")
+        self.EditPassword.setStyleSheet("QLabel {\n" "    font-size: 18px;\n" "}")
         self.EditPassword.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.EditPassword.setObjectName("EditPassword")
         self.PassEntry = QtWidgets.QLineEdit(parent=PasswordChange)
         self.PassEntry.setGeometry(QtCore.QRect(50, 75, 201, 30))
-        self.PassEntry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 10px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.PassEntry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 10px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.PassEntry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
         self.PassEntry.setObjectName("PassEntry")
         self.ok_cancel = QtWidgets.QDialogButtonBox(parent=PasswordChange)
         self.ok_cancel.setGeometry(QtCore.QRect(0, 145, 291, 28))
         self.ok_cancel.setMouseTracking(False)
-        self.ok_cancel.setStyleSheet("QPushButton {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"    padding: 6px 12px;\n"
-"    border: none;\n"
-"    border-radius: 4px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #2980b9;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #1c5980;\n"
-"}\n"
-"")
-        self.ok_cancel.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.ok_cancel.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: #3498db;\n"
+            "    color: white;\n"
+            "    padding: 6px 12px;\n"
+            "    border: none;\n"
+            "    border-radius: 4px;\n"
+            "    font-weight: bold;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "    background-color: #2980b9;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #1c5980;\n"
+            "}\n"
+            ""
+        )
+        self.ok_cancel.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel
+            | QtWidgets.QDialogButtonBox.StandardButton.Ok
+        )
         self.ok_cancel.setCenterButtons(True)
         self.ok_cancel.setObjectName("ok_cancel")
         self.LockIcon = QtWidgets.QLabel(parent=PasswordChange)
@@ -123,10 +134,15 @@ class Ui_PasswordChange(object):
         self.LockIcon.setObjectName("LockIcon")
         self.PassEntryLabel = QtWidgets.QLabel(parent=PasswordChange)
         self.PassEntryLabel.setGeometry(QtCore.QRect(48, 55, 121, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.PassEntryLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.PassEntryLabel.sizePolicy().hasHeightForWidth()
+        )
         self.PassEntryLabel.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Roboto Light")
@@ -134,25 +150,31 @@ class Ui_PasswordChange(object):
         font.setBold(True)
         font.setKerning(False)
         self.PassEntryLabel.setFont(font)
-        self.PassEntryLabel.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.PassEntryLabel.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.PassEntryLabel.setScaledContents(True)
         self.PassEntryLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.PassEntryLabel.setObjectName("PassEntryLabel")
         self.GenPassword = QtWidgets.QPushButton(parent=PasswordChange)
         self.GenPassword.setGeometry(QtCore.QRect(223, 79, 21, 21))
-        self.GenPassword.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.GenPassword.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.GenPassword.setToolTipDuration(-1)
-        self.GenPassword.setStyleSheet("QPushButton {\n"
-"    background-color: #FFFFFF;  /* Replace with your desired color */\n"
-"    color: white;               /* Text color */\n"
-"    border-radius: 5px;         /* Optional: rounded corners */\n"
-"    padding: 5px;               /* Optional: spacing inside button */\n"
-"}")
+        self.GenPassword.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: #FFFFFF;  /* Replace with your desired color */\n"
+            "    color: white;               /* Text color */\n"
+            "    border-radius: 5px;         /* Optional: rounded corners */\n"
+            "    padding: 5px;               /* Optional: spacing inside button */\n"
+            "}"
+        )
         self.GenPassword.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("UI/Assets/settings.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(
+            QtGui.QPixmap("UI/Assets/settings.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         self.GenPassword.setIcon(icon1)
         self.GenPassword.setIconSize(QtCore.QSize(22, 22))
         self.GenPassword.setObjectName("GenPassword")
@@ -165,4 +187,9 @@ class Ui_PasswordChange(object):
         PasswordChange.setWindowTitle(_translate("PasswordChange", "Password Change"))
         self.EditPassword.setText(_translate("PasswordChange", "EDIT PASSWORD"))
         self.PassEntryLabel.setText(_translate("PasswordChange", "ENTER PASSWORD"))
-        self.GenPassword.setToolTip(_translate("PasswordChange", "<html><head/><body><p>Generate password</p></body></html>"))
+        self.GenPassword.setToolTip(
+            _translate(
+                "PasswordChange",
+                "<html><head/><body><p>Generate password</p></body></html>",
+            )
+        )

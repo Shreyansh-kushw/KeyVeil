@@ -16,51 +16,57 @@ class Ui_SiteDetailsWIndow(object):
         SiteDetailsWIndow.setMinimumSize(QtCore.QSize(400, 400))
         SiteDetailsWIndow.setMaximumSize(QtCore.QSize(400, 400))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/Assets/iconslock.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("UI/Assets/iconslock.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         SiteDetailsWIndow.setWindowIcon(icon)
-        SiteDetailsWIndow.setStyleSheet("QDialog {\n"
-"    background-color: #dde6f0;  /* soft white */\n"
-"    border: 1px solid #ccc;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    font-size: 18px;\n"
-"    font-weight: bold;\n"
-"    color: #333;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"    background-color: #ffffff;\n"
-"    color: #000000;\n"
-"    border: 2px solid #cccccc;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px;\n"
-"    font-size: 15px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #007acc;  /* blue focus glow */\n"
-"    background-color: #f5faff;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #007acc;\n"
-"    color: #ffffff;\n"
-"    font-weight: bold;\n"
-"    border: none;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px 14px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #3399ff;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #006bb3;\n"
-"}\n"
-"")
+        SiteDetailsWIndow.setStyleSheet(
+            "QDialog {\n"
+            "    background-color: #dde6f0;  /* soft white */\n"
+            "    border: 1px solid #ccc;\n"
+            "    border-radius: 12px;\n"
+            "}\n"
+            "\n"
+            "QLabel {\n"
+            "    font-size: 18px;\n"
+            "    font-weight: bold;\n"
+            "    color: #333;\n"
+            "}\n"
+            "\n"
+            "QLineEdit {\n"
+            "    background-color: #ffffff;\n"
+            "    color: #000000;\n"
+            "    border: 2px solid #cccccc;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px;\n"
+            "    font-size: 15px;\n"
+            "}\n"
+            "\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #007acc;  /* blue focus glow */\n"
+            "    background-color: #f5faff;\n"
+            "}\n"
+            "\n"
+            "QPushButton {\n"
+            "    background-color: #007acc;\n"
+            "    color: #ffffff;\n"
+            "    font-weight: bold;\n"
+            "    border: none;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px 14px;\n"
+            "}\n"
+            "\n"
+            "QPushButton:hover {\n"
+            "    background-color: #3399ff;\n"
+            "}\n"
+            "\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #006bb3;\n"
+            "}\n"
+            ""
+        )
         self.SiteDetails = QtWidgets.QLabel(parent=SiteDetailsWIndow)
         self.SiteDetails.setGeometry(QtCore.QRect(9, 15, 391, 25))
         font = QtGui.QFont()
@@ -72,37 +78,44 @@ class Ui_SiteDetailsWIndow(object):
         self.SiteDetails.setObjectName("SiteDetails")
         self.SiteName_entry = QtWidgets.QLineEdit(parent=SiteDetailsWIndow)
         self.SiteName_entry.setGeometry(QtCore.QRect(50, 73, 291, 30))
-        self.SiteName_entry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 12px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.SiteName_entry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 12px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.SiteName_entry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
         self.SiteName_entry.setObjectName("SiteName_entry")
         self.ok_cancel = QtWidgets.QDialogButtonBox(parent=SiteDetailsWIndow)
         self.ok_cancel.setGeometry(QtCore.QRect(0, 315, 401, 28))
         self.ok_cancel.setMouseTracking(False)
-        self.ok_cancel.setStyleSheet("QPushButton {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"    padding: 6px 12px;\n"
-"    border: none;\n"
-"    border-radius: 4px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #2980b9;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #1c5980;\n"
-"}\n"
-"")
-        self.ok_cancel.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.ok_cancel.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: #3498db;\n"
+            "    color: white;\n"
+            "    padding: 6px 12px;\n"
+            "    border: none;\n"
+            "    border-radius: 4px;\n"
+            "    font-weight: bold;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "    background-color: #2980b9;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #1c5980;\n"
+            "}\n"
+            ""
+        )
+        self.ok_cancel.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel
+            | QtWidgets.QDialogButtonBox.StandardButton.Ok
+        )
         self.ok_cancel.setCenterButtons(True)
         self.ok_cancel.setObjectName("ok_cancel")
         self.SiteIcon = QtWidgets.QLabel(parent=SiteDetailsWIndow)
@@ -119,7 +132,10 @@ class Ui_SiteDetailsWIndow(object):
         self.SiteIcon.setObjectName("SiteIcon")
         self.SiteName = QtWidgets.QLabel(parent=SiteDetailsWIndow)
         self.SiteName.setGeometry(QtCore.QRect(10, 55, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.SiteName.sizePolicy().hasHeightForWidth())
@@ -130,15 +146,16 @@ class Ui_SiteDetailsWIndow(object):
         font.setBold(True)
         font.setKerning(False)
         self.SiteName.setFont(font)
-        self.SiteName.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.SiteName.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.SiteName.setScaledContents(True)
         self.SiteName.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.SiteName.setObjectName("SiteName")
         self.SiteURL = QtWidgets.QLabel(parent=SiteDetailsWIndow)
         self.SiteURL.setGeometry(QtCore.QRect(21, 118, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.SiteURL.sizePolicy().hasHeightForWidth())
@@ -149,15 +166,16 @@ class Ui_SiteDetailsWIndow(object):
         font.setBold(True)
         font.setKerning(False)
         self.SiteURL.setFont(font)
-        self.SiteURL.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.SiteURL.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.SiteURL.setScaledContents(True)
         self.SiteURL.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.SiteURL.setObjectName("SiteURL")
         self.Password = QtWidgets.QLabel(parent=SiteDetailsWIndow)
         self.Password.setGeometry(QtCore.QRect(11, 242, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.Password.sizePolicy().hasHeightForWidth())
@@ -168,15 +186,16 @@ class Ui_SiteDetailsWIndow(object):
         font.setBold(True)
         font.setKerning(False)
         self.Password.setFont(font)
-        self.Password.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.Password.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.Password.setScaledContents(True)
         self.Password.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.Password.setObjectName("Password")
         self.Username = QtWidgets.QLabel(parent=SiteDetailsWIndow)
         self.Username.setGeometry(QtCore.QRect(11, 179, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.Username.sizePolicy().hasHeightForWidth())
@@ -187,17 +206,18 @@ class Ui_SiteDetailsWIndow(object):
         font.setBold(True)
         font.setKerning(False)
         self.Username.setFont(font)
-        self.Username.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.Username.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.Username.setScaledContents(True)
         self.Username.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.Username.setObjectName("Username")
         self.CopySiteName = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.CopySiteName.setGeometry(QtCore.QRect(340, 66, 41, 41))
-        self.CopySiteName.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.CopySiteName.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.CopySiteName.setToolTipDuration(-1)
-        self.CopySiteName.setStyleSheet("""
+        self.CopySiteName.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -214,18 +234,26 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.CopySiteName.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("UI/Assets/copy.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(
+            QtGui.QPixmap("UI/Assets/copy.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         self.CopySiteName.setIcon(icon1)
         self.CopySiteName.setIconSize(QtCore.QSize(30, 30))
         self.CopySiteName.setObjectName("CopySiteName")
         self.CopySiteURL = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.CopySiteURL.setGeometry(QtCore.QRect(340, 128, 41, 41))
-        self.CopySiteURL.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.CopySiteURL.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.CopySiteURL.setToolTipDuration(-1)
-        self.CopySiteURL.setStyleSheet("""
+        self.CopySiteURL.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -242,44 +270,52 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.CopySiteURL.setText("")
         self.CopySiteURL.setIcon(icon1)
         self.CopySiteURL.setIconSize(QtCore.QSize(30, 30))
         self.CopySiteURL.setObjectName("CopySiteURL")
         self.SiteURL_entry = QtWidgets.QLineEdit(parent=SiteDetailsWIndow)
         self.SiteURL_entry.setGeometry(QtCore.QRect(50, 135, 291, 30))
-        self.SiteURL_entry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 12px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.SiteURL_entry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 12px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.SiteURL_entry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
         self.SiteURL_entry.setObjectName("SiteURL_entry")
         self.UsernameEntry = QtWidgets.QLineEdit(parent=SiteDetailsWIndow)
         self.UsernameEntry.setGeometry(QtCore.QRect(50, 199, 291, 30))
-        self.UsernameEntry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 12px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.UsernameEntry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 12px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.UsernameEntry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
         self.UsernameEntry.setObjectName("UsernameEntry")
         self.CopyUsername = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.CopyUsername.setGeometry(QtCore.QRect(340, 192, 41, 41))
-        self.CopyUsername.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.CopyUsername.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.CopyUsername.setToolTipDuration(-1)
-        self.CopyUsername.setStyleSheet("""
+        self.CopyUsername.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -296,30 +332,36 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.CopyUsername.setText("")
         self.CopyUsername.setIcon(icon1)
         self.CopyUsername.setIconSize(QtCore.QSize(30, 30))
         self.CopyUsername.setObjectName("CopyUsername")
         self.PasswordEntry = QtWidgets.QLineEdit(parent=SiteDetailsWIndow)
         self.PasswordEntry.setGeometry(QtCore.QRect(50, 259, 291, 30))
-        self.PasswordEntry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 12px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.PasswordEntry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 12px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.PasswordEntry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
         self.PasswordEntry.setObjectName("PasswordEntry")
         self.CopyPassword = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.CopyPassword.setGeometry(QtCore.QRect(340, 252, 41, 41))
-        self.CopyPassword.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.CopyPassword.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.CopyPassword.setToolTipDuration(-1)
-        self.CopyPassword.setStyleSheet("""
+        self.CopyPassword.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -336,7 +378,8 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
 
         self.CopyPassword.setText("")
         self.CopyPassword.setIcon(icon1)
@@ -344,9 +387,12 @@ QPushButton:pressed {
         self.CopyPassword.setObjectName("CopyPassword")
         self.EditPassword = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.EditPassword.setGeometry(QtCore.QRect(314, 262, 21, 21))
-        self.EditPassword.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.EditPassword.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.EditPassword.setToolTipDuration(-1)
-        self.EditPassword.setStyleSheet("""
+        self.EditPassword.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -363,18 +409,26 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.EditPassword.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("UI/Assets/editing.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(
+            QtGui.QPixmap("UI/Assets/editing.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         self.EditPassword.setIcon(icon2)
         self.EditPassword.setIconSize(QtCore.QSize(22, 20))
         self.EditPassword.setObjectName("EditPassword")
         self.EditUsername = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.EditUsername.setGeometry(QtCore.QRect(314, 202, 21, 21))
-        self.EditUsername.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.EditUsername.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.EditUsername.setToolTipDuration(-1)
-        self.EditUsername.setStyleSheet("""
+        self.EditUsername.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -391,7 +445,8 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.EditUsername.setText("")
         self.EditUsername.setIcon(icon2)
         self.EditUsername.setIconSize(QtCore.QSize(22, 20))
@@ -400,7 +455,8 @@ QPushButton:pressed {
         self.EditURL.setGeometry(QtCore.QRect(314, 138, 21, 21))
         self.EditURL.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.EditURL.setToolTipDuration(-1)
-        self.EditURL.setStyleSheet("""
+        self.EditURL.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -417,16 +473,20 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.EditURL.setText("")
         self.EditURL.setIcon(icon2)
         self.EditURL.setIconSize(QtCore.QSize(22, 20))
         self.EditURL.setObjectName("EditURL")
         self.EditSiteName = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.EditSiteName.setGeometry(QtCore.QRect(314, 77, 21, 21))
-        self.EditSiteName.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.EditSiteName.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
         self.EditSiteName.setToolTipDuration(-1)
-        self.EditSiteName.setStyleSheet("""
+        self.EditSiteName.setStyleSheet(
+            """
 QPushButton {
     background-color: #dde6f0;        /* Light neutral background */
     border: none;
@@ -443,31 +503,34 @@ QPushButton:pressed {
     padding-left: 7px;                /* Visual nudge for press */
     padding-top: 7px;
 }
-""")
+"""
+        )
         self.EditSiteName.setText("")
         self.EditSiteName.setIcon(icon2)
         self.EditSiteName.setIconSize(QtCore.QSize(22, 20))
         self.EditSiteName.setObjectName("EditSiteName")
         self.deleteButton = QtWidgets.QPushButton(parent=SiteDetailsWIndow)
         self.deleteButton.setGeometry(QtCore.QRect(150, 351, 101, 31))
-        self.deleteButton.setStyleSheet("QPushButton {\n"
-"    background-color: transparent;\n"
-"    color: red;\n"
-"    padding: 6px 12px;\n"
-"    border: 2px solid red;\n"
-"    border-radius: 4px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #ff4d4d; /* bright red */\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #cc0000; /* darker red for press effect */\n"
-"}\n"
-"")
+        self.deleteButton.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: transparent;\n"
+            "    color: red;\n"
+            "    padding: 6px 12px;\n"
+            "    border: 2px solid red;\n"
+            "    border-radius: 4px;\n"
+            "    font-weight: bold;\n"
+            "}\n"
+            "\n"
+            "QPushButton:hover {\n"
+            "    background-color: #ff4d4d; /* bright red */\n"
+            "    color: white;\n"
+            "}\n"
+            "\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #cc0000; /* darker red for press effect */\n"
+            "}\n"
+            ""
+        )
         self.deleteButton.setObjectName("pushButton")
 
         self.retranslateUi(SiteDetailsWIndow)
@@ -475,18 +538,56 @@ QPushButton:pressed {
 
     def retranslateUi(self, SiteDetailsWIndow):
         _translate = QtCore.QCoreApplication.translate
-        SiteDetailsWIndow.setWindowTitle(_translate("SiteDetailsWIndow", "Site Details"))
+        SiteDetailsWIndow.setWindowTitle(
+            _translate("SiteDetailsWIndow", "Site Details")
+        )
         self.SiteDetails.setText(_translate("SiteDetailsWIndow", "SITE DETAILS"))
         self.SiteName.setText(_translate("SiteDetailsWIndow", "SITE NAME"))
         self.SiteURL.setText(_translate("SiteDetailsWIndow", "SITE ADDRESS"))
         self.Password.setText(_translate("SiteDetailsWIndow", "PASSWORD"))
         self.Username.setText(_translate("SiteDetailsWIndow", "USERNAME"))
-        self.CopySiteName.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"))
-        self.CopySiteURL.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"))
-        self.CopyUsername.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"))
-        self.CopyPassword.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"))
-        self.EditPassword.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Edit Entry</p></body></html>"))
-        self.EditUsername.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Edit Entry</p></body></html>"))
-        self.EditURL.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Edit Entry</p></body></html>"))
-        self.EditSiteName.setToolTip(_translate("SiteDetailsWIndow", "<html><head/><body><p>Edit Entry</p></body></html>"))
+        self.CopySiteName.setToolTip(
+            _translate(
+                "SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"
+            )
+        )
+        self.CopySiteURL.setToolTip(
+            _translate(
+                "SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"
+            )
+        )
+        self.CopyUsername.setToolTip(
+            _translate(
+                "SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"
+            )
+        )
+        self.CopyPassword.setToolTip(
+            _translate(
+                "SiteDetailsWIndow", "<html><head/><body><p>Copy</p></body></html>"
+            )
+        )
+        self.EditPassword.setToolTip(
+            _translate(
+                "SiteDetailsWIndow",
+                "<html><head/><body><p>Edit Entry</p></body></html>",
+            )
+        )
+        self.EditUsername.setToolTip(
+            _translate(
+                "SiteDetailsWIndow",
+                "<html><head/><body><p>Edit Entry</p></body></html>",
+            )
+        )
+        self.EditURL.setToolTip(
+            _translate(
+                "SiteDetailsWIndow",
+                "<html><head/><body><p>Edit Entry</p></body></html>",
+            )
+        )
+        self.EditSiteName.setToolTip(
+            _translate(
+                "SiteDetailsWIndow",
+                "<html><head/><body><p>Edit Entry</p></body></html>",
+            )
+        )
         self.deleteButton.setText(_translate("SiteDetailsWIndow", "DELETE"))

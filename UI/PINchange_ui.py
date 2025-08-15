@@ -16,51 +16,57 @@ class Ui_PINChangeWindow(object):
         PINChangeWindow.setMinimumSize(QtCore.QSize(300, 280))
         PINChangeWindow.setMaximumSize(QtCore.QSize(300, 280))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/Assets/iconslock.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("UI/Assets/iconslock.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         PINChangeWindow.setWindowIcon(icon)
-        PINChangeWindow.setStyleSheet("QDialog {\n"
-"    background-color: #dde6f0;  /* soft white */\n"
-"    border: 1px solid #ccc;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    font-size: 18px;\n"
-"    font-weight: bold;\n"
-"    color: #333;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"    background-color: #ffffff;\n"
-"    color: #000000;\n"
-"    border: 2px solid #cccccc;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px;\n"
-"    font-size: 15px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #007acc;  /* blue focus glow */\n"
-"    background-color: #f5faff;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #007acc;\n"
-"    color: #ffffff;\n"
-"    font-weight: bold;\n"
-"    border: none;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px 14px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #3399ff;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #006bb3;\n"
-"}\n"
-"")
+        PINChangeWindow.setStyleSheet(
+            "QDialog {\n"
+            "    background-color: #dde6f0;  /* soft white */\n"
+            "    border: 1px solid #ccc;\n"
+            "    border-radius: 12px;\n"
+            "}\n"
+            "\n"
+            "QLabel {\n"
+            "    font-size: 18px;\n"
+            "    font-weight: bold;\n"
+            "    color: #333;\n"
+            "}\n"
+            "\n"
+            "QLineEdit {\n"
+            "    background-color: #ffffff;\n"
+            "    color: #000000;\n"
+            "    border: 2px solid #cccccc;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px;\n"
+            "    font-size: 15px;\n"
+            "}\n"
+            "\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #007acc;  /* blue focus glow */\n"
+            "    background-color: #f5faff;\n"
+            "}\n"
+            "\n"
+            "QPushButton {\n"
+            "    background-color: #007acc;\n"
+            "    color: #ffffff;\n"
+            "    font-weight: bold;\n"
+            "    border: none;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px 14px;\n"
+            "}\n"
+            "\n"
+            "QPushButton:hover {\n"
+            "    background-color: #3399ff;\n"
+            "}\n"
+            "\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #006bb3;\n"
+            "}\n"
+            ""
+        )
         self.PINChange = QtWidgets.QLabel(parent=PINChangeWindow)
         self.PINChange.setGeometry(QtCore.QRect(74, 11, 151, 25))
         font = QtGui.QFont()
@@ -72,37 +78,44 @@ class Ui_PINChangeWindow(object):
         self.PINChange.setObjectName("PINChange")
         self.NewPIN_Entry = QtWidgets.QLineEdit(parent=PINChangeWindow)
         self.NewPIN_Entry.setGeometry(QtCore.QRect(50, 129, 191, 30))
-        self.NewPIN_Entry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 10px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.NewPIN_Entry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 10px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.NewPIN_Entry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.NewPIN_Entry.setObjectName("NewPIN_Entry")
         self.ok_cancel = QtWidgets.QDialogButtonBox(parent=PINChangeWindow)
         self.ok_cancel.setGeometry(QtCore.QRect(0, 240, 291, 28))
         self.ok_cancel.setMouseTracking(False)
-        self.ok_cancel.setStyleSheet("QPushButton {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"    padding: 6px 12px;\n"
-"    border: none;\n"
-"    border-radius: 4px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #2980b9;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #1c5980;\n"
-"}\n"
-"")
-        self.ok_cancel.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.ok_cancel.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: #3498db;\n"
+            "    color: white;\n"
+            "    padding: 6px 12px;\n"
+            "    border: none;\n"
+            "    border-radius: 4px;\n"
+            "    font-weight: bold;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "    background-color: #2980b9;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #1c5980;\n"
+            "}\n"
+            ""
+        )
+        self.ok_cancel.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel
+            | QtWidgets.QDialogButtonBox.StandardButton.Ok
+        )
         self.ok_cancel.setCenterButtons(True)
         self.ok_cancel.setObjectName("ok_cancel")
         self.LockIcon = QtWidgets.QLabel(parent=PINChangeWindow)
@@ -119,21 +132,26 @@ class Ui_PINChangeWindow(object):
         self.LockIcon.setObjectName("LockIcon")
         self.ConfirmPIN_Entry = QtWidgets.QLineEdit(parent=PINChangeWindow)
         self.ConfirmPIN_Entry.setGeometry(QtCore.QRect(50, 192, 191, 30))
-        self.ConfirmPIN_Entry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 10px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.ConfirmPIN_Entry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 10px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.ConfirmPIN_Entry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.ConfirmPIN_Entry.setObjectName("ConfirmPIN_Entry")
         self.NewPIN = QtWidgets.QLabel(parent=PINChangeWindow)
         self.NewPIN.setGeometry(QtCore.QRect(27, 110, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.NewPIN.sizePolicy().hasHeightForWidth())
@@ -144,15 +162,16 @@ class Ui_PINChangeWindow(object):
         font.setBold(True)
         font.setKerning(False)
         self.NewPIN.setFont(font)
-        self.NewPIN.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.NewPIN.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.NewPIN.setScaledContents(True)
         self.NewPIN.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.NewPIN.setObjectName("NewPIN")
         self.ConfirmPIN = QtWidgets.QLabel(parent=PINChangeWindow)
         self.ConfirmPIN.setGeometry(QtCore.QRect(18, 173, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ConfirmPIN.sizePolicy().hasHeightForWidth())
@@ -163,29 +182,32 @@ class Ui_PINChangeWindow(object):
         font.setBold(True)
         font.setKerning(False)
         self.ConfirmPIN.setFont(font)
-        self.ConfirmPIN.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.ConfirmPIN.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.ConfirmPIN.setScaledContents(True)
         self.ConfirmPIN.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.ConfirmPIN.setObjectName("ConfirmPIN")
         self.CurrentPIN_Entry = QtWidgets.QLineEdit(parent=PINChangeWindow)
         self.CurrentPIN_Entry.setGeometry(QtCore.QRect(50, 68, 191, 30))
-        self.CurrentPIN_Entry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 10px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.CurrentPIN_Entry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 10px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.CurrentPIN_Entry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.CurrentPIN_Entry.setObjectName("CurrentPIN_Entry")
         self.CurrentPIN = QtWidgets.QLabel(parent=PINChangeWindow)
         self.CurrentPIN.setGeometry(QtCore.QRect(20, 48, 151, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.CurrentPIN.sizePolicy().hasHeightForWidth())
@@ -196,9 +218,7 @@ class Ui_PINChangeWindow(object):
         font.setBold(True)
         font.setKerning(False)
         self.CurrentPIN.setFont(font)
-        self.CurrentPIN.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.CurrentPIN.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.CurrentPIN.setScaledContents(True)
         self.CurrentPIN.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.CurrentPIN.setObjectName("CurrentPIN")

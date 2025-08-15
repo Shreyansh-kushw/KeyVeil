@@ -16,52 +16,58 @@ class Ui_LoginWindow(object):
         LoginWindow.setMinimumSize(QtCore.QSize(300, 180))
         LoginWindow.setMaximumSize(QtCore.QSize(300, 225))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("UI/Assets/iconslock.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(
+            QtGui.QPixmap("UI/Assets/iconslock.png"),
+            QtGui.QIcon.Mode.Normal,
+            QtGui.QIcon.State.Off,
+        )
         LoginWindow.setWindowIcon(icon)
         LoginWindow.setAutoFillBackground(False)
-        LoginWindow.setStyleSheet("QDialog {\n"
-"    background-color: #dde6f0;  /* soft white */\n"
-"    border: 1px solid #ccc;\n"
-"    border-radius: 12px;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    font-size: 18px;\n"
-"    font-weight: bold;\n"
-"    color: #333;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"    background-color: #ffffff;\n"
-"    color: #000000;\n"
-"    border: 2px solid #cccccc;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px;\n"
-"    font-size: 15px;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #007acc;  /* blue focus glow */\n"
-"    background-color: #f5faff;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #007acc;\n"
-"    color: #ffffff;\n"
-"    font-weight: bold;\n"
-"    border: none;\n"
-"    border-radius: 6px;\n"
-"    padding: 6px 14px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #3399ff;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #006bb3;\n"
-"}\n"
-"")
+        LoginWindow.setStyleSheet(
+            "QDialog {\n"
+            "    background-color: #dde6f0;  /* soft white */\n"
+            "    border: 1px solid #ccc;\n"
+            "    border-radius: 12px;\n"
+            "}\n"
+            "\n"
+            "QLabel {\n"
+            "    font-size: 18px;\n"
+            "    font-weight: bold;\n"
+            "    color: #333;\n"
+            "}\n"
+            "\n"
+            "QLineEdit {\n"
+            "    background-color: #ffffff;\n"
+            "    color: #000000;\n"
+            "    border: 2px solid #cccccc;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px;\n"
+            "    font-size: 15px;\n"
+            "}\n"
+            "\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #007acc;  /* blue focus glow */\n"
+            "    background-color: #f5faff;\n"
+            "}\n"
+            "\n"
+            "QPushButton {\n"
+            "    background-color: #007acc;\n"
+            "    color: #ffffff;\n"
+            "    font-weight: bold;\n"
+            "    border: none;\n"
+            "    border-radius: 6px;\n"
+            "    padding: 6px 14px;\n"
+            "}\n"
+            "\n"
+            "QPushButton:hover {\n"
+            "    background-color: #3399ff;\n"
+            "}\n"
+            "\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #006bb3;\n"
+            "}\n"
+            ""
+        )
         self.PIN = QtWidgets.QLabel(parent=LoginWindow)
         self.PIN.setGeometry(QtCore.QRect(76, 11, 171, 25))
         font = QtGui.QFont()
@@ -69,44 +75,49 @@ class Ui_LoginWindow(object):
         font.setPointSize(10)
         font.setBold(True)
         self.PIN.setFont(font)
-        self.PIN.setStyleSheet("QLabel {\n"
-"    font-size: 18px;\n"
-"}")
+        self.PIN.setStyleSheet("QLabel {\n" "    font-size: 18px;\n" "}")
         self.PIN.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.PIN.setObjectName("PIN")
         self.PinEntry = QtWidgets.QLineEdit(parent=LoginWindow)
         self.PinEntry.setGeometry(QtCore.QRect(50, 75, 191, 30))
-        self.PinEntry.setStyleSheet("QLineEdit {\n"
-"    border: 2px solid #2980b9;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 10px;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"}\n"
-"")
+        self.PinEntry.setStyleSheet(
+            "QLineEdit {\n"
+            "    border: 2px solid #2980b9;\n"
+            "    border-radius: 5px;\n"
+            "    padding: 5px;\n"
+            "    font-size: 10px;\n"
+            "}\n"
+            "QLineEdit:focus {\n"
+            "    border: 2px solid #3498db;\n"
+            "}\n"
+            ""
+        )
         self.PinEntry.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.PinEntry.setObjectName("PinEntry")
         self.ok_cancel = QtWidgets.QDialogButtonBox(parent=LoginWindow)
         self.ok_cancel.setGeometry(QtCore.QRect(0, 145, 291, 28))
         self.ok_cancel.setMouseTracking(False)
-        self.ok_cancel.setStyleSheet("QPushButton {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"    padding: 6px 12px;\n"
-"    border: none;\n"
-"    border-radius: 4px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #2980b9;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #1c5980;\n"
-"}\n"
-"")
-        self.ok_cancel.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.ok_cancel.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: #3498db;\n"
+            "    color: white;\n"
+            "    padding: 6px 12px;\n"
+            "    border: none;\n"
+            "    border-radius: 4px;\n"
+            "    font-weight: bold;\n"
+            "}\n"
+            "QPushButton:hover {\n"
+            "    background-color: #2980b9;\n"
+            "}\n"
+            "QPushButton:pressed {\n"
+            "    background-color: #1c5980;\n"
+            "}\n"
+            ""
+        )
+        self.ok_cancel.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel
+            | QtWidgets.QDialogButtonBox.StandardButton.Ok
+        )
         self.ok_cancel.setCenterButtons(True)
         self.ok_cancel.setObjectName("ok_cancel")
         self.LockIcon = QtWidgets.QLabel(parent=LoginWindow)
@@ -123,10 +134,15 @@ class Ui_LoginWindow(object):
         self.LockIcon.setObjectName("LockIcon")
         self.PinEntryLabel = QtWidgets.QLabel(parent=LoginWindow)
         self.PinEntryLabel.setGeometry(QtCore.QRect(27, 53, 121, 20))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Expanding,
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.PinEntryLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.PinEntryLabel.sizePolicy().hasHeightForWidth()
+        )
         self.PinEntryLabel.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Roboto Light")
@@ -134,9 +150,7 @@ class Ui_LoginWindow(object):
         font.setBold(True)
         font.setKerning(False)
         self.PinEntryLabel.setFont(font)
-        self.PinEntryLabel.setStyleSheet("QLabel {\n"
-"    font-size: 12px;\n"
-"}")
+        self.PinEntryLabel.setStyleSheet("QLabel {\n" "    font-size: 12px;\n" "}")
         self.PinEntryLabel.setScaledContents(True)
         self.PinEntryLabel.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.PinEntryLabel.setObjectName("PinEntryLabel")
@@ -144,16 +158,18 @@ class Ui_LoginWindow(object):
         self.ResetPIN.setGeometry(QtCore.QRect(180, 106, 61, 16))
         self.ResetPIN.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.ResetPIN.setAutoFillBackground(False)
-        self.ResetPIN.setStyleSheet("QPushButton {\n"
-"    background-color: #dde6f0;  /* Replace with your desired color */\n"
-"    color: #3498DB;               /* Text color */\n"
-"    border-radius: 5px;         /* Optional: rounded corners */\n"
-"    padding: 5px;               /* Optional: spacing inside button */\n"
-"}\n"
-"QPushButton {\n"
-"    padding: 2px 5px; /* top-bottom | left-right */\n"
-"    font-size: 11px;  /* Keep your desired text size */\n"
-"}")
+        self.ResetPIN.setStyleSheet(
+            "QPushButton {\n"
+            "    background-color: #dde6f0;  /* Replace with your desired color */\n"
+            "    color: #3498DB;               /* Text color */\n"
+            "    border-radius: 5px;         /* Optional: rounded corners */\n"
+            "    padding: 5px;               /* Optional: spacing inside button */\n"
+            "}\n"
+            "QPushButton {\n"
+            "    padding: 2px 5px; /* top-bottom | left-right */\n"
+            "    font-size: 11px;  /* Keep your desired text size */\n"
+            "}"
+        )
         self.ResetPIN.setObjectName("ResetPIN")
 
         self.retranslateUi(LoginWindow)
