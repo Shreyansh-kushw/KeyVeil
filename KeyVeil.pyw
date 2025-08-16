@@ -3,6 +3,7 @@ import sys
 import os
 import subprocess
 import datetime
+import time
 import csv
 
 from PyQt6.QtCore import QCoreApplication, Qt
@@ -288,6 +289,14 @@ class Authentication(QDialog):
 
                 return
 
+            if self.vaultDATA == "Unauthorised":
+                QMessageBox.warning(
+                    self,
+                    "Error",
+                    "Unauthorised PC!",
+                )
+                os._exit(0)
+
             # Valid PIN
             self.accept()
 
@@ -347,6 +356,7 @@ class KeyVeilAPI:
         self.signals.CSVImporter.connect(self.import_csv_logic)
         self.key = key
         self.authenticator = authenticator
+        self.editedDetails = False
 
     def get_entries(self):
         # print("get_entries called")  # ✅ Debug
@@ -448,15 +458,19 @@ class KeyVeilAPI:
         self.signals.CSVImporter.emit()
 
     def editSiteName(self):
+        self.editedDetails = True
         self.SiteDetails_ui.SiteName_entry.setReadOnly(False)
 
     def editSiteURL(self):
+        self.editedDetails = True
         self.SiteDetails_ui.SiteURL_entry.setReadOnly(False)
 
     def editUsername(self):
+        self.editedDetails = True
         self.SiteDetails_ui.UsernameEntry.setReadOnly(False)
 
     def editPassword(self):
+        self.editedDetails = True
         self.SiteDetails_ui.PasswordEntry.setReadOnly(False)
 
     def deleteEntry(self, vaultData, username, confirmation=True):
@@ -469,63 +483,66 @@ class KeyVeilAPI:
 
     def updateData(self, vaultData, username):
 
-        if self.SiteDetails_ui.SiteName_entry.text().strip() == self.siteName:
+        if self.editedDetails:
 
-            for creds in vaultData[self.siteName]:
+            if self.SiteDetails_ui.SiteName_entry.text().strip() == self.siteName:
 
-                if (
-                    creds["username"]
-                    == self.SiteDetails_ui.UsernameEntry.text().strip()
-                ):
-                    print("for else")
-                    creds.update(
+                for creds in vaultData[self.siteName]:
+
+                    if (
+                        creds["username"]
+                        == self.SiteDetails_ui.UsernameEntry.text().strip()
+                    ):
+                        creds.update(
+                            {
+                                "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
+                                "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
+                            }
+                        )
+                        break
+
+                else:
+                    (vaultData[self.siteName]).append(
                         {
                             "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
+                            "username": self.SiteDetails_ui.UsernameEntry.text().strip(),
                             "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
                         }
                     )
-                    break
+                    self.deleteEntry(vaultData, username, confirmation=False)
 
             else:
-                print("not updated")
-                (vaultData[self.siteName]).append(
-                    {
-                        "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
-                        "username": self.SiteDetails_ui.UsernameEntry.text().strip(),
-                        "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
-                    }
-                )
-                self.deleteEntry(vaultData, username, confirmation=False)
+
+                newSite = self.SiteDetails_ui.SiteName_entry.text().strip()
+
+                if newSite in vaultData.keys():
+                    (vaultData[newSite]).append(
+                        {
+                            "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
+                            "username": self.SiteDetails_ui.UsernameEntry.text().strip(),
+                            "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
+                        }
+                    )
+                    self.deleteEntry(vaultData, username, confirmation=False)
+
+                else:
+                    vaultData[newSite] = []
+                    (vaultData[newSite]).append(
+                        {
+                            "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
+                            "username": self.SiteDetails_ui.UsernameEntry.text().strip(),
+                            "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
+                        }
+                    )
+                    self.deleteEntry(vaultData, username, confirmation=False)
+
+            vault.saveVault(self.key, vaultData)
+            self.dialog.update()
+            self.dialog.accept()
+            webview.windows[0].load_url(os.path.abspath("frontend/index.html"))
 
         else:
-
-            newSite = self.SiteDetails_ui.SiteName_entry.text().strip()
-
-            if newSite in vaultData.keys():
-                (vaultData[newSite]).append(
-                    {
-                        "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
-                        "username": self.SiteDetails_ui.UsernameEntry.text().strip(),
-                        "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
-                    }
-                )
-                self.deleteEntry(vaultData, username, confirmation=False)
-
-            else:
-                vaultData[newSite] = []
-                (vaultData[newSite]).append(
-                    {
-                        "url": self.SiteDetails_ui.SiteURL_entry.text().strip(),
-                        "username": self.SiteDetails_ui.UsernameEntry.text().strip(),
-                        "password": self.SiteDetails_ui.PasswordEntry.text().strip(),
-                    }
-                )
-                self.deleteEntry(vaultData, username, confirmation=False)
-
-        vault.saveVault(self.key, vaultData)
-        self.dialog.update()
-        self.dialog.accept()
-        webview.windows[0].load_url(os.path.abspath("frontend/index.html"))
+            self.dialog.accept()
         # self.dialog.close()
 
     def open_password_generator(self):
