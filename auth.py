@@ -85,7 +85,7 @@ def genKey(pin, salt):
         algorithm=hashes.SHA256(),  # Secure hash function
         length=32,  # 32-byte key = AES-256
         salt=salt,  # Random salt
-        iterations=2000000,  # Slows down brute-force
+        iterations=1000000,  # Slows down brute-force
     )
 
     del salt

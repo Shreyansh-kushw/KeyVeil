@@ -5,6 +5,7 @@ import subprocess
 import datetime
 import time
 import csv
+import threading
 
 from PyQt6.QtCore import QCoreApplication, Qt
 
@@ -340,7 +341,8 @@ class SignalEmitter(QObject):
     CreateBackup = pyqtSignal()
     PINchange = pyqtSignal()
     CSVImporter = pyqtSignal()
-
+    restarter = pyqtSignal()
+    LogOutInfo = pyqtSignal()
 
 class KeyVeilAPI:
     def __init__(self, vaultDATA, key, authenticator):
@@ -354,9 +356,28 @@ class KeyVeilAPI:
         self.signals.CreateBackup.connect(self.create_backup)
         self.signals.PINchange.connect(self.change_pin)
         self.signals.CSVImporter.connect(self.import_csv_logic)
+        self.signals.restarter.connect(self.restart)
+        self.signals.LogOutInfo.connect(self.LogOutMessage,type=Qt.ConnectionType.BlockingQueuedConnection)
         self.key = key
         self.authenticator = authenticator
         self.editedDetails = False
+        self.AutoLockTimer = 300
+        self.start_AutoLocker_thread()
+
+    def AutoLock(self):
+        
+        time.sleep(self.AutoLockTimer)
+        self.signals.LogOutInfo.emit()
+        self.signals.restarter.emit()
+
+    def LogOutMessage(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setWindowTitle("Info")
+        msg.setText("Session Expired! Login Again.")
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.setWindowModality(Qt.WindowModality.ApplicationModal)
+        msg.exec()
 
     def get_entries(self):
         # print("get_entries called")  # ✅ Debug
@@ -372,6 +393,7 @@ class KeyVeilAPI:
         subprocess.Popen(
             [sys.executable, "KeyVeil.pyw"], creationflags=subprocess.DETACHED_PROCESS
         )
+        vault.saveVault(self.key, self.vaultDATA)
         QCoreApplication.quit()  # Close the current app
         sys.exit(0)
 
@@ -456,6 +478,10 @@ class KeyVeilAPI:
 
     def start_CSVImport_thread(self):
         self.signals.CSVImporter.emit()
+    
+    def start_AutoLocker_thread(self):
+        self.Thread = threading.Thread(target=self.AutoLock)
+        self.Thread.start()
 
     def editSiteName(self):
         self.editedDetails = True
