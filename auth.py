@@ -56,20 +56,22 @@ def getSalt():
     global Authorised
 
     try:
-        f = open("salt.bin", "rb")  # tries opening the salt file if it exists
-        salt = f.read()
-        f.close()
+        with open("salt.bin","rb") as f:
+            salt = f.read()
+            
         fingerprint = salt[64:]
         if fingerprint != (get_fingerprint()).encode():
             Authorised = False
         else:
             Authorised = True
+        del fingerprint
 
     except:
 
         """Generates the salt if not found."""
         fingerprint = (get_fingerprint()).encode()
         salt = os.urandom(64) + fingerprint
+        del fingerprint
         with open("salt.bin", "wb") as f:
             f.write(salt)
         os.chmod("salt.bin", 0o600)
@@ -77,7 +79,7 @@ def getSalt():
     return salt
 
 
-def genKey(pin, salt):
+def genKey(pin:str, salt):
     """Generates the key and converts it into base64 (from binary) and return it"""
     """Here we are returning base64 key because FERNET which is used for encryption of the vault requires a base64 key"""
 
