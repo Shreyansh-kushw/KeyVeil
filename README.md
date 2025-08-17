@@ -1,5 +1,5 @@
 # 🔐 KeyVeil
-Fernet and PBKDF2 based password manager made with python.
+Fernet and PBKDF2 based password manager made with python for **Windows**.
 
 KeyVeil is a light weight, local-only password manager that uses fernet for vault encryption and PBKDF2 for key derivation.
 

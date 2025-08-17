@@ -15,27 +15,20 @@ def openVault(key: bytes):
 
     else:
 
-        if auth.Authorised:
-            try:
+        try:
+            vaultData = open("vault.enc", "rb")
+            encryptedData = vaultData.read()
+            decrypted = fernet.decrypt(encryptedData)
+            del encryptedData
+            vaultData.close()
 
-                vaultData = open("vault.enc", "rb")
-                encryptedData = vaultData.read()
-                decrypted = fernet.decrypt(encryptedData)
-                del encryptedData
-                vaultData.close()
+            return json.loads(decrypted.decode())
 
-                return json.loads(decrypted.decode())
+        except Exception as e:
 
-            except Exception as e:
+            return None
 
-                # print(f"Error loading vault.\n{e}")
-                # print("Incorrect password or vault corrupted!")
-                # traceback.print_exc()
-                # print("no vaulting")
-                return None
 
-        else:
-            return "Unauthorised"
 
 
 def saveVault(key: bytes, vaultData: dict):
