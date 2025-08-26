@@ -215,17 +215,6 @@
       transition: background-color 0.2s ease;
     }
 
-    .add-password {
-      background-color: #9ca3af; /* muted gray */
-      color: #e5e7eb; /* light gray text */
-      border: none;
-      border-radius: 50%;
-      cursor: not-allowed;
-      display: flex;
-      opacity: 0.6;
-      pointer-events: none; /* prevents interaction */
-      transition: none; /* remove hover transitions */
-    }
 
     .export-data {
       background-color: #9ca3af; /* muted gray */
@@ -344,7 +333,7 @@
   <div class="dropdown">
     <button class="dropdown-btn" onclick="toggleDropdown()">+</button>
     <div class="dropdown-menu" id="dropdownMenu">
-      <button class = "add-password" onclick="addPassword()" disabled>Add Password</button>
+      <button class = "add-password" onclick="addPassword()">Add Password</button>
       <button onclick="createBackup()">Create Backup</button>
       <button onclick="restoreBackup()">Restore Backup</button>
       <button onclick="importCSV()">Import from .csv</button>
@@ -445,7 +434,7 @@
 
     function addPassword() {
       if (window.pywebview && window.pywebview.api) {
-        window.pywebview.api.open_add_password_dialog();
+        window.pywebview.api.open_add_password_thread();
       } else {
         alert("PyWebView API not available");
       }

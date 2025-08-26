@@ -31,6 +31,7 @@ from UI.signUp_ui import Ui_SignUp
 from UI.PasswordGen_ui import Ui_PassGenerator
 from UI.PINchange_ui import Ui_PINChangeWindow
 from UI.SiteData_ui import Ui_SiteDetailsWIndow
+from UI.AddPassword_ui import Ui_AddPasswordWindow
 
 import auth
 import vault
@@ -343,6 +344,7 @@ class SignalEmitter(QObject):
     CSVImporter = pyqtSignal()
     restarter = pyqtSignal()
     LogOutInfo = pyqtSignal()
+    AddPassword = pyqtSignal()
 
 class KeyVeilAPI:
     def __init__(self, vaultDATA, key, authenticator):
@@ -358,6 +360,7 @@ class KeyVeilAPI:
         self.signals.CSVImporter.connect(self.import_csv_logic)
         self.signals.restarter.connect(self.restart)
         self.signals.LogOutInfo.connect(self.LogOutMessage,type=Qt.ConnectionType.BlockingQueuedConnection)
+        self.signals.AddPassword.connect(self.AddPassword_Logic)
         self.key = key
         self.authenticator = authenticator
         self.editedDetails = False
@@ -482,6 +485,9 @@ class KeyVeilAPI:
     def start_AutoLocker_thread(self):
         self.Thread = threading.Thread(target=self.AutoLock)
         self.Thread.start()
+
+    def open_add_password_thread(self):
+        self.signals.AddPassword.emit()
 
     def editSiteName(self):
         self.editedDetails = True
@@ -723,6 +729,36 @@ class KeyVeilAPI:
 
         else:
             pass
+
+    def AddCredentials(self):
+        vos.add_entry(
+            self.vaultDATA,
+            self.AddPasswordWindow_ui.SiteName_entry.text(),
+            self.AddPasswordWindow_ui.SiteURL_entry.text(),
+            self.AddPasswordWindow_ui.UsernameEntry.text(),
+            self.AddPasswordWindow_ui.PasswordEntry.text()
+        )
+        webview.windows[0].load_url(os.path.abspath("frontend/index.html"))
+        self.AddDialog.accept()
+
+
+    def AddPassword_Logic(self):
+        
+        
+        self.AddDialog = QDialog()
+        self.AddDialog.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
+        self.AddDialog.setWindowModality(Qt.WindowModality.ApplicationModal)
+
+        self.AddPasswordWindow_ui = Ui_AddPasswordWindow()
+        self.AddPasswordWindow_ui.setupUi(self.AddDialog)
+
+        self.AddPasswordWindow_ui.ok_cancel.accepted.connect(lambda: self.AddCredentials())
+
+        self.AddPasswordWindow_ui.ok_cancel.rejected.connect(
+            lambda: self.AddDialog.reject()
+        )
+        self.AddDialog.exec()
+
 
     def choose_csv_file(self):
         """Creates a dialog box to allow user to choose .csv file"""
