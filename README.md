@@ -1,4 +1,13 @@
 # 🔐 KeyVeil
+
+
+![Python Version](https://img.shields.io/badge/python-3.9%2B-blue?logo=python)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?logo=windows)
+![License](https://img.shields.io/badge/license-GNU-green)
+![Status](https://img.shields.io/badge/status-archived-orange)
+![Repo Size](https://img.shields.io/github/repo-size/Shreyansh-kushw/KeyVeil?color=blue)
+![Last Commit](https://img.shields.io/github/last-commit/Shreyansh-kushw/KeyVeil?color=brightgreen)
+
 Fernet and PBKDF2 based password manager made with python for **Windows**.
 
 KeyVeil is a light weight, local-only password manager that uses fernet for vault encryption and PBKDF2 for key derivation.
