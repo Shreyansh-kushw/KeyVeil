@@ -1,4 +1,7 @@
-from pyautogui import confirm, alert
+"""Takes care of all the CRUD operations, backup and restore operations to be performed on the vault"""
+
+# Importing modules
+
 import traceback
 import secrets
 import string
@@ -8,13 +11,19 @@ import questionary
 import zipfile
 import auth
 import vault
-from tabulate import tabulate
 import pydoc
+
+from pyautogui import confirm, alert
+from tabulate import tabulate
+
 
 PINchanged = False
 
+# ----------- All Main Functions -------------- #
+
 
 def add_entry(vault: dict, name: str, site: str, username: str, password: str) -> None:
+    """Adds entry to the vault"""
 
     name = name.lower()
     if name not in vault:
@@ -24,6 +33,7 @@ def add_entry(vault: dict, name: str, site: str, username: str, password: str) -
 
 
 def restoreBackup(directory, backup_file):
+    """Restores the backup selected"""
 
     response = confirm(
         text="This will overwrite the current vault",
@@ -48,6 +58,7 @@ def restoreBackup(directory, backup_file):
 
 
 def backUp(destination="""backup folder""") -> None:
+    """Creates a backup"""
 
     if not os.path.exists(destination):
         os.makedirs(destination)
@@ -66,6 +77,7 @@ def backUp(destination="""backup folder""") -> None:
 
 
 def delete_entry(vault: dict, site: str, username: str, confirmation=True) -> bool:
+    """Deletes an entry from the vault"""
 
     site = site.lower()
 
@@ -102,6 +114,7 @@ def delete_entry(vault: dict, site: str, username: str, confirmation=True) -> bo
 
 
 def edit_entry(vault: dict, site: str, username: str = None, password: str = None):
+    """Edits and updates the entry in the vault"""
 
     site = site.lower()
 
@@ -126,6 +139,7 @@ def edit_entry(vault: dict, site: str, username: str = None, password: str = Non
 
 
 def search_entries(vault: dict, keyword: str) -> dict:
+    """Searching among all the entries in the vault"""
 
     keyword = keyword.lower()
     search_results = {}
@@ -138,6 +152,7 @@ def search_entries(vault: dict, keyword: str) -> dict:
 
 
 def show_search_passwords(vault, search_results):
+    """Returns the seach results"""
 
     serial = 1
     search_Data = []
@@ -272,6 +287,7 @@ def show_entries(vault) -> None:
 
 
 def generate_password(length: int = 16) -> str:
+    """Generates a password of specified length"""
 
     characters = string.ascii_letters + string.digits + string.punctuation
 
@@ -284,6 +300,7 @@ def generate_password(length: int = 16) -> str:
 
 
 def change_password(current_password, new_pin, confirm_pin):
+    """Responsible for changing the PIN of the vault"""
 
     global PINchanged
 
@@ -325,6 +342,7 @@ def change_password(current_password, new_pin, confirm_pin):
 
 
 def reset_password():
+    """Responsible for resetting the password of the vault"""
 
     try:
         backUp()
@@ -335,5 +353,4 @@ def reset_password():
         pass
 
     print("PIN Reset!")
-
     return

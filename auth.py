@@ -1,3 +1,5 @@
+"""Responsible for the authentication process"""
+
 # Importing necessary modules #
 
 import os

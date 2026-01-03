@@ -1,3 +1,7 @@
+"""The main application of KeyVeil"""
+
+"""__version__ = 1.0.0"""
+
 # === Standard Imports ===
 import sys
 import os
@@ -41,10 +45,12 @@ import webview
 import pyperclip
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='Keyveil.log', level=logging.INFO)
+logging.basicConfig(filename="Keyveil.log", level=logging.INFO)
 
 
 class BackupRestoreDialog(QDialog):
+    """Responsible for the dialog for restoring backups"""
+
     def __init__(self, backup_files=None):
         super().__init__()
         self.setWindowTitle("Restore from Backup")
@@ -84,10 +90,12 @@ class BackupRestoreDialog(QDialog):
         self.cancel_button.clicked.connect(self.reject)
 
     def enable_restore_button(self):
+        """Enables the restore button when a backup is selected"""
         selected = self.backup_list.selectedItems()
         self.restore_button.setEnabled(bool(selected))
 
     def browse_backup(self):
+        """Opens the explorer menu to browse for backup"""
         file_path, _ = QFileDialog.getOpenFileName(
             self, "Select Backup File", "", "Backup Files (*.zip)"
         )
@@ -96,6 +104,7 @@ class BackupRestoreDialog(QDialog):
             self.accept()
 
     def get_selected_backup(self):
+        """Returns the name for the selected backup"""
         selected = self.backup_list.selectedItems()
         if selected:
             return selected[0].text()
@@ -103,19 +112,22 @@ class BackupRestoreDialog(QDialog):
 
 
 class Authentication(QDialog):
+    """Class responsible for all the authentication functions"""
 
     def __init__(self):
+
         super().__init__()
-        self.login_attempts = 0
-        self.max_login_attempts = 5
+        self.login_attempts = 0  # initial logic attempts
+        self.max_login_attempts = 5  # total allowed attempts
 
         if os.path.exists("salt.bin"):
-            auth.newUser = False
+            auth.newUser = False  # checking if the user is new or not
 
         else:
             auth.newUser = True
 
         if not auth.newUser:
+            # if the user is not new go ahead with login
 
             self.login_ui = Ui_LoginWindow()
             self.login_ui.setupUi(self)
@@ -125,6 +137,7 @@ class Authentication(QDialog):
             self.login_ui.ResetPIN.clicked.connect(lambda: self.launch_PIN_reset())
 
         else:
+            # in case the user is new, ask for sign up
 
             self.signUp_ui = Ui_SignUp()
             self.signUp_ui.setupUi(self)
@@ -136,6 +149,7 @@ class Authentication(QDialog):
             )
 
     def restoreBackup(self, directory):
+        """Backup restoration logic"""
 
         if os.path.isdir(directory):
 
@@ -159,18 +173,21 @@ class Authentication(QDialog):
                         )
                     except Exception as e:
 
-                        pass # No need to raise an error here as if a backup file is not working, it should not hinder the working of the rest of the code
+                        pass  # No need to raise an error here as if a backup file is not working, it should not hinder the working of the rest of the code
 
             dialog = BackupRestoreDialog(backup_files=available_backups)
 
             if dialog.exec():
                 try:
-                    
+                    # restoring the backup
+
                     vos.restoreBackup(
                         directory,
                         backups[available_backups.index(dialog.get_selected_backup())],
                     )
-                    logger.info(str(datetime.datetime.now()) + " Backup restored successfully! ")
+                    logger.info(
+                        str(datetime.datetime.now()) + " Backup restored successfully! "
+                    )
                     msg = QMessageBox()
                     msg.setIcon(QMessageBox.Icon.Information)
                     msg.setWindowTitle("Backup Restored")
@@ -184,7 +201,11 @@ class Authentication(QDialog):
                     QTimer.singleShot(100, self.restart)
 
                 except Exception as error:
-                    logger.error(str(datetime.datetime.now()) + " Backup restoration failed! ")
+                    # Raise an error in case something goes wrong
+
+                    logger.error(
+                        str(datetime.datetime.now()) + " Backup restoration failed! "
+                    )
                     msg = QMessageBox()
                     msg.setIcon(QMessageBox.Icon.Information)
                     msg.setWindowTitle("Operation Failed")
@@ -205,21 +226,24 @@ class Authentication(QDialog):
             QMessageBox.warning(self, "Error", "No backup found!")
 
     def restart(self):
+        """Function responsible for restarting the app"""
+
         logger.info(str(datetime.datetime.now()) + " Restarting.. ")
         if webview.windows:
             webview.windows[0].destroy()
         QApplication.closeAllWindows()
         self._restart_process()
-    
+
     def _restart_process(self):
-        print("restart_process")
+        """Restarting loggic"""
+
         subprocess.Popen(
             [sys.executable, "KeyVeil.pyw"], creationflags=subprocess.DETACHED_PROCESS
         )
         QCoreApplication.quit()
-    
 
     def resetPIN(self):
+        """PIN reset logic"""
 
         msg_box = QMessageBox()
         msg_box.setIcon(QMessageBox.Icon.Warning)
@@ -250,11 +274,10 @@ class Authentication(QDialog):
                 msg.exec()
 
                 # Delay quit slightly to allow cleanup of WebEnginePage
-                # self.restart()
                 QTimer.singleShot(100, self.restart)
-                # os.execv(sys.executable, ['python'] + sys.argv)
 
             except Exception as error:
+
                 logger.error(str(datetime.datetime.now()) + " PIN reset failed! ")
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Icon.Information)
@@ -267,11 +290,16 @@ class Authentication(QDialog):
                 msg.exec()
 
     def launch_PIN_reset(self):
+        """Function to launch the pin reset logic"""
         QTimer.singleShot(0, self.resetPIN)
 
     def authenticate(self):
+        """Function for authentication"""
 
-        if not auth.newUser:
+        if (
+            not auth.newUser
+        ):  # if the user is not new, try to decrypt the vault and check if it is none or not
+            # if the vault is none, then the pin was incorrect, otherwise it was correct
 
             self.password = self.login_ui.PinEntry.text().strip()
             self.salt = auth.getSalt()
@@ -283,7 +311,7 @@ class Authentication(QDialog):
             self.key = auth.genKey(self.password, self.salt)
             self.vaultDATA = vault.openVault(self.key)
 
-            if self.vaultDATA == None:  # vault is None or empty
+            if self.vaultDATA == None:  # vault is None or empty -> incorrect pin
 
                 logger.info(str(datetime.datetime.now()) + " Invalid login attempt! ")
                 self.login_attempts += 1
@@ -296,7 +324,9 @@ class Authentication(QDialog):
                     )
 
                 else:
-                    logger.critical(str(datetime.datetime.now()) + " All login attempts exhausted! ")
+                    logger.critical(
+                        str(datetime.datetime.now()) + " All login attempts exhausted! "
+                    )
                     QMessageBox.warning(
                         self,
                         "Error",
@@ -307,7 +337,10 @@ class Authentication(QDialog):
                 return
 
             if self.vaultDATA == "Unauthorised":
-                logger.critical(str(datetime.datetime.now()) + " Unauthorized device detected! ")
+                # if the PC is detected to be unauthorized. -> NOTE: The backend for this was not implemented
+                logger.critical(
+                    str(datetime.datetime.now()) + " Unauthorized device detected! "
+                )
                 QMessageBox.warning(
                     self,
                     "Error",
@@ -317,11 +350,16 @@ class Authentication(QDialog):
 
             # Valid PIN
             self.accept()
+
             logger.info(str(datetime.datetime.now()) + " Authentication successfull! ")
+
+            # Deleting the reference of sensitive variables from memory
             del self.password
             del self.salt
 
         else:
+            """PIN reset logic"""
+
             pin1 = self.signUp_ui.NewPIN.text().strip()
             pin2 = self.signUp_ui.ConfirmPIN_2.text().strip()
 
@@ -332,12 +370,17 @@ class Authentication(QDialog):
             if pin1 != pin2:
                 QMessageBox.warning(self, "Error", "Both PINs do not match!")
                 return
+
             logger.info(str(datetime.datetime.now()) + " PIN reset successfully! ")
             self.password = pin1
             self.salt = auth.getSalt()
             self.key = auth.genKey(self.password, self.salt)
+
+            # Deleting reference of sensitive variables from memory
+
             del self.salt
             del self.password
+
             self.vaultDATA = vault.openVault(self.key)
             vault.saveVault(self.key, self.vaultDATA)
 
@@ -347,12 +390,14 @@ class Authentication(QDialog):
             self.accept()
 
     def exit_code(self):
+        """Function to exit the code during the authentication phase."""
 
         QApplication.quit()
         self.reject()
 
 
 class SignalEmitter(QObject):
+    """Signal emitter class"""
 
     openDetails = pyqtSignal(str, str)
     openPasswordGenerator = pyqtSignal()
@@ -365,12 +410,14 @@ class SignalEmitter(QObject):
     LogOutInfo = pyqtSignal()
     AddPassword = pyqtSignal()
 
+
 class ActivityFilter(QObject):
+    """Activity filter class to detect whether activity like mouse clicks, movement etc to check for whether the user is active or not"""
 
     def __init__(self, function):
         super().__init__()
         self.funct = function
-    
+
     def eventFilter(self, object, event):
         if event.type() in (
             QEvent.Type.MouseMove,
@@ -382,9 +429,14 @@ class ActivityFilter(QObject):
 
         return False
 
+
 class KeyVeilAPI(QObject):
+    """The KeyVeil API class to connect to PyWebView frontend"""
+
     def __init__(self, vaultDATA, key, authenticator):
         super().__init__()
+
+        # Defining some variables
 
         self.vaultDATA = vaultDATA
         self.signals = SignalEmitter()
@@ -409,6 +461,8 @@ class KeyVeilAPI(QObject):
         )
 
     def LogOutMessage(self):
+        """Shows the log out dialog box when the session expires."""
+
         logger.info(str(datetime.datetime.now()) + " Session expired! ")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)
@@ -419,6 +473,8 @@ class KeyVeilAPI(QObject):
         msg.exec()
 
     def get_entries(self):
+        """Gets the entries from vaultData to be displayed on the frontend"""
+
         result = []
         for site, creds in self.vaultDATA.items():
             for cred in creds:
@@ -426,14 +482,17 @@ class KeyVeilAPI(QObject):
         return result
 
     def restart(self):
+        """Restart logic"""
+
         logger.info(str(datetime.datetime.now()) + " Restarting. ")
-        
+
         if webview.windows:
             webview.windows[0].destroy()
 
         self._restart_process()
-    
+
     def _restart_process(self):
+
         print("rnning restarter process")
         subprocess.Popen(
             [sys.executable, "KeyVeil.pyw"], creationflags=subprocess.DETACHED_PROCESS
@@ -441,12 +500,15 @@ class KeyVeilAPI(QObject):
         QCoreApplication.quit()
 
     def copy_password(self):
+        """Copy password logic"""
+
         logger.info(str(datetime.datetime.now()) + " Password copied! ")
         pyperclip.copy(self.SiteDetails_ui.PasswordEntry.text().strip())
         QTimer.singleShot(30_000, lambda: pyperclip.copy(" "))
 
     def view_site_details(self, site_name, username):
-        
+        """Function to show the details about any site when the View button next to it is clicked"""
+
         site_data = self.vaultDATA.get(site_name)
         if not site_data:
             return
@@ -485,9 +547,7 @@ class KeyVeilAPI(QObject):
         self.SiteDetails_ui.CopyUsername.clicked.connect(
             lambda: pyperclip.copy(self.SiteDetails_ui.UsernameEntry.text().strip())
         )
-        self.SiteDetails_ui.CopyPassword.clicked.connect(
-            lambda: self.copy_password()
-        )
+        self.SiteDetails_ui.CopyPassword.clicked.connect(lambda: self.copy_password())
 
         self.SiteDetails_ui.EditSiteName.clicked.connect(lambda: self.editSiteName())
         self.SiteDetails_ui.EditURL.clicked.connect(lambda: self.editSiteURL())
@@ -501,10 +561,14 @@ class KeyVeilAPI(QObject):
         self.SiteDetails_ui.ok_cancel.accepted.connect(
             lambda: self.updateData(self.vaultDATA, username)
         )
-        self.SiteDetails_ui.ok_cancel.rejected.connect(lambda: self.detail_dialog.reject())
+        self.SiteDetails_ui.ok_cancel.rejected.connect(
+            lambda: self.detail_dialog.reject()
+        )
 
         self.detail_dialog.exec()
-    
+
+    # ------------ Functions for starting threads for various actions ------------ #
+
     def start_details_thread(self, site_name, username):
         self.signals.openDetails.emit(site_name, username)
 
@@ -535,6 +599,10 @@ class KeyVeilAPI(QObject):
     def open_add_password_thread(self):
         self.signals.AddPassword.emit()
 
+    # ------------------------------------------------------------ #
+
+    # ------------ Functions to edit the details about a site ------------ #
+
     def editSiteName(self):
         self.editedDetails = True
         self.SiteDetails_ui.SiteName_entry.setReadOnly(False)
@@ -560,19 +628,26 @@ class KeyVeilAPI(QObject):
             self.detail_dialog.accept()
             webview.windows[0].load_url(os.path.abspath("frontend/index.html"))
 
+    # ------------------------------------------------------------ #
+
     def handle_timeout(self):
+        """Handles the timeout"""
+
         self.signals.LogOutInfo.emit()
         self.signals.restarter.emit()
-    
+
     def reset_auto_lock_timer(self):
+        """Handles the reset of the lock timer if the app is active"""
+
         if self.auto_lock_timer.isActive():
             self.auto_lock_timer.stop()
-        
+
         self.auto_lock_timer.start(600_000)
 
     def updateData(self, vaultData, username):
+        """Updates the site details if edited, otherwise does nothing"""
 
-        if self.editedDetails:
+        if self.editedDetails:  # sitre detailes were edited
 
             if self.SiteDetails_ui.SiteName_entry.text().strip() == self.siteName:
 
@@ -628,19 +703,22 @@ class KeyVeilAPI(QObject):
             vault.saveVault(self.key, vaultData)
             self.detail_dialog.update()
             self.detail_dialog.accept()
-            webview.windows[0].load_url(os.path.abspath("frontend/index.html"))
+            webview.windows[0].load_url(
+                os.path.abspath("frontend/index.html")
+            )  # reloading the front page to show the new changes
 
-        else:
+        else:  # site details were not edited
             self.detail_dialog.reject()
-        # self.dialog.close()
 
     def open_password_generator(self):
+        """Opens the password generator dialog"""
+
         password_dialog = QDialog()  # ✅ persistent + parented
 
         password_dialog.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
         password_dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
 
-        ui = Ui_PassGenerator()               # ✅ LOCAL UI
+        ui = Ui_PassGenerator()  # ✅ LOCAL UI
         ui.setupUi(password_dialog)
 
         ui.GenerateButton.clicked.connect(
@@ -649,21 +727,20 @@ class KeyVeilAPI(QObject):
             )
         )
 
-        ui.CopyVutton.clicked.connect(
-            lambda: pyperclip.copy(ui.GeneratedPass.text())
-        )
+        ui.CopyVutton.clicked.connect(lambda: pyperclip.copy(ui.GeneratedPass.text()))
 
         password_dialog.exec()
-        password_dialog.deleteLater()    # ✅ cleanup
-
+        password_dialog.deleteLater()  # ✅ cleanup
 
     def create_password(self):
+        """Generates the password to be displayed in the generate password dialog"""
 
         self.PasswordGenerator_ui.GeneratedPass.setText(
             vos.generate_password(int(self.PasswordGenerator_ui.LengthEntry.text()))
         )
 
     def delete_vault_data(self):
+        """Function that handles deletion of the entire vault"""
 
         msg_box = QMessageBox()
         msg_box.setIcon(QMessageBox.Icon.Warning)
@@ -706,11 +783,12 @@ class KeyVeilAPI(QObject):
             return
 
     def restore_backup(self):
+        """Restoring a backup when the user calls for"""
 
         self.authenticator.restoreBackup("""backup folder""")
-        
 
     def create_backup(self):
+        """Function responsible for creating a backup"""
 
         try:
 
@@ -735,6 +813,7 @@ class KeyVeilAPI(QObject):
             msg.exec()
 
     def changePIN_logic(self):
+        """Function responsible for changing the PIN"""
 
         response = vos.change_password(
             self.PINchange_ui.CurrentPIN_Entry.text().strip(),
@@ -777,6 +856,7 @@ class KeyVeilAPI(QObject):
             self.PINchange_dialog.reject()
 
     def change_pin(self):
+        """Creates the change PIN dialog"""
 
         self.PINchange_dialog = QDialog()
         self.PINchange_dialog.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
@@ -792,11 +872,13 @@ class KeyVeilAPI(QObject):
 
         if PINChanger:
             self.restart()
-            
+
             if webview.windows:
                 webview.windows[0].destroy()
 
     def AddCredentials(self):
+        """Adds credentials to the vault"""
+
         vos.add_entry(
             self.vaultDATA,
             self.AddPasswordWindow_ui.SiteName_entry.text(),
@@ -808,6 +890,7 @@ class KeyVeilAPI(QObject):
         self.AddDialog.accept()
 
     def AddPassword_Logic(self):
+        """Creates the add password dialog box"""
 
         self.AddDialog = QDialog()
         self.AddDialog.setAttribute(Qt.WidgetAttribute.WA_Hover, True)
@@ -824,7 +907,7 @@ class KeyVeilAPI(QObject):
             lambda: self.AddDialog.reject()
         )
         self.AddDialog.exec()
-        vault.saveVault(self.key , self.vaultDATA)
+        vault.saveVault(self.key, self.vaultDATA)
 
     def choose_csv_file(self):
         """Creates a dialog box to allow user to choose .csv file"""
@@ -857,6 +940,7 @@ class KeyVeilAPI(QObject):
         return imported
 
     def import_csv_logic(self):
+        """Logic to import the passwords to the vault from CSV file"""
 
         csvPath = self.choose_csv_file()
 
@@ -911,7 +995,9 @@ class KeyVeilAPI(QObject):
 
             except Exception as e:
                 # print("Some error occured while importing passwords:", e)
-                raise RuntimeError("Some error occured while importing passwords") from e
+                raise RuntimeError(
+                    "Some error occured while importing passwords"
+                ) from e
         else:
             return
 
@@ -919,17 +1005,20 @@ class KeyVeilAPI(QObject):
 class KeyVeil:
 
     def closeApp(self):
-        print("closing")
+        """Function to close the app when the user clicks the X button"""
+
         QTimer.singleShot(200, QApplication.quit)
         time.sleep(3)
         self.force_exit()
-    
+
     def force_exit(self):
-        print("force closing")
+        """Forces the app to quit if it doesn't using QApplication.quit"""
+
         if QCoreApplication.instance() is not None:
             os._exit(0)
 
     def run(self, vaultData, key, login):
+        """Runs the final app"""
 
         api = KeyVeilAPI(vaultData, key, login)
         html_path = os.path.abspath("frontend/index.html")
@@ -950,6 +1039,7 @@ class KeyVeil:
 
 
 def main():
+    """Funtion that brings it all together and runs the app"""
 
     app = QApplication(sys.argv)
 
@@ -967,5 +1057,8 @@ def main():
 
     sys.exit(app.exec())
 
+
 if __name__ == "__main__":
+    # Running the code
+
     main()
