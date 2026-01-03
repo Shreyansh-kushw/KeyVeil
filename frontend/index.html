@@ -283,6 +283,12 @@
       background-color: #2563eb;
     }
 
+    .icon-info{
+      position: relative;
+      left: 20px;
+      color: black;
+    }
+
     @media (max-width: 600px) {
       table, thead, tbody, th, td, tr {
         display: block;
@@ -336,7 +342,7 @@
       <button class = "add-password" onclick="addPassword()">Add Password</button>
       <button onclick="createBackup()">Create Backup</button>
       <button onclick="restoreBackup()">Restore Backup</button>
-      <button onclick="importCSV()">Import from .csv</button>
+      <button onclick="importCSV()" >Import from google (.csv)</button>
     </div>
   </div>
   <button class="gen-btn" onclick="generatePassword()" title="Generate Password">

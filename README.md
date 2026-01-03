@@ -83,6 +83,11 @@ pythonw KeyVeil.pyw
     - **Sensitive variables are deleted (``del``) wherever possible**
     - **All the data is stored locally**
 
+## ⚠️ Project Scope
+
+KeyVeil is an offline, single-user password manager designed for local use.
+It does not provide cloud sync, browser integration, or multi-device support.
+
 ## 📂 Project Structure
 ```
 KeyVeil/

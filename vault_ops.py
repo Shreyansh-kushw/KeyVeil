@@ -17,13 +17,6 @@ PINchanged = False
 def add_entry(vault: dict, name: str, site: str, username: str, password: str) -> None:
 
     name = name.lower()
-
-    # vault[name] ={
-    #         "url" : site,
-    #         "username":username,
-    #         "password": password,
-    #         "note": notes
-    #         }
     if name not in vault:
         vault[name] = []  # Initialize as a list
 
@@ -340,18 +333,6 @@ def reset_password():
 
     except:
         pass
-
-        # while True:
-
-        #     new_pin = getpass.getpass("Enter NEW PIN: ")
-        #     confirm_pin = getpass.getpass("Confirm NEW PIN: ")
-
-        #     if new_pin != confirm_pin:
-        #         print("Both PIN do not match!")
-        #         continue
-
-        #     else:
-        #         break
 
     print("PIN Reset!")
 
