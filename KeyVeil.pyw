@@ -114,7 +114,7 @@ class BackupRestoreDialog(QDialog):
 class Authentication(QDialog):
     """Class responsible for all the authentication functions"""
 
-    def __init__(self):
+    def __init__(self, vault_deletion:bool = False):
 
         super().__init__()
         self.login_attempts = 0  # initial logic attempts
@@ -133,7 +133,13 @@ class Authentication(QDialog):
             self.login_ui.setupUi(self)
 
             self.login_ui.ok_cancel.accepted.connect(self.authenticate)
-            self.login_ui.ok_cancel.rejected.connect(self.exit_code)
+
+            if not vault_deletion:
+                self.login_ui.ok_cancel.rejected.connect(self.exit_code)
+            
+            else:
+                self.login_ui.ok_cancel.rejected.connect(self.reject)
+
             self.login_ui.ResetPIN.clicked.connect(lambda: self.launch_PIN_reset())
 
         else:
@@ -758,7 +764,7 @@ class KeyVeilAPI(QObject):
         response = msg_box.exec()
 
         if response == QMessageBox.StandardButton.Yes:
-            askPIN = Authentication()
+            askPIN = Authentication(vault_deletion = True)
 
             if askPIN.exec():  # if user entered correct PIN
                 # print("PIN accepted")
